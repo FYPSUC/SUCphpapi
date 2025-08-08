@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: phpapi
+    env: docker
+    plan: free
+    repo: https://github.com/FYPSUC/PHPAPI
+    branch: master
+    rootDir: flutter_api  # 如果项目在子目录，填写目录名；否则留空
+    region: singapore
