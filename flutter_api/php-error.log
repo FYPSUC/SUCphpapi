@@ -1,0 +1,15 @@
+[11-Aug-2025 09:36:57 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'bubbletea@gmail.com' for key 'vendor.Email' in C:\laragon\www\flutter_api\register.php:43
+Stack trace:
+#0 C:\laragon\www\flutter_api\register.php(43): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\laragon\www\flutter_api\register.php on line 43
+[11-Aug-2025 09:38:45 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'bubbletea@gmail.com' for key 'vendor.Email' in C:\laragon\www\flutter_api\register.php:43
+Stack trace:
+#0 C:\laragon\www\flutter_api\register.php(43): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\laragon\www\flutter_api\register.php on line 43
+[11-Aug-2025 09:41:27 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'bubbletea@gmail.com' for key 'vendor.Email' in C:\laragon\www\flutter_api\register.php:43
+Stack trace:
+#0 C:\laragon\www\flutter_api\register.php(43): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\laragon\www\flutter_api\register.php on line 43

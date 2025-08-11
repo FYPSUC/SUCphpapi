@@ -9,10 +9,11 @@ if (!$vendor_uid) {
 }
 
 $sql = "
-SELECT o.OrderID, o.Status, o.OrderDate, oi.ProductID, oi.Quantity, oi.UnitPrice, p.ProductName
+SELECT o.OrderID, o.Status, o.OrderDate, oi.ProductID,  v.DiscountAmount, oi.Quantity, oi.UnitPrice, p.ProductName
 FROM `order` o
 JOIN orderitem oi ON o.OrderID = oi.OrderID
 JOIN product p ON oi.ProductID = p.ProductID
+LEFT JOIN voucher v ON o.VoucherID = v.VoucherID
 WHERE o.VendorID = ? AND o.Status != 'completed'
 ORDER BY o.OrderDate DESC";
 
@@ -30,6 +31,7 @@ while ($row = $result->fetch_assoc()) {
             "orderId" => $order_id,
             "status" => strtolower($row['Status']),
             "orderDate" => $row['OrderDate'],
+             "voucherDiscount" => $row['DiscountAmount'] ?? 0,
             "items" => []
         ];
     }

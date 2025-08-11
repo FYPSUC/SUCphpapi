@@ -26,7 +26,7 @@ if (!$stmt->execute()) {
 
 
     // 构造验证链接
-    $BASE_URL = "https://5a8accff9752.ngrok-free.app/flutter_api";
+    $BASE_URL = "https://d98ba8134d3e.ngrok-free.app/flutter_api";
    $link = "$BASE_URL/verify_reset.php?token=$token";
 
 

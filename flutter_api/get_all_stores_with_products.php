@@ -7,10 +7,16 @@ include __DIR__ . '/config.php';
 $result = [];
 
 $query = "SELECT v.FirebaseUID, v.ShopName, v.PickupAddress, v.AdShopImage,
-          p.ProductID, p.ProductName, p.ProductPrice, p.Image,p.isSoldOut
+                 p.ProductID, p.ProductName, p.ProductPrice, p.Image, p.isSoldOut,
+                 COALESCE(SUM(oi.Quantity), 0) AS total_quantity,
+                 COALESCE(SUM(oi.Subtotal), 0) AS total_sales
           FROM vendor v
           LEFT JOIN product p ON v.FirebaseUID = p.FirebaseUID
-          ORDER BY v.ShopName";
+          LEFT JOIN orderitem oi ON p.ProductID = oi.ProductID
+          GROUP BY v.FirebaseUID, v.ShopName, v.PickupAddress, v.AdShopImage,
+                   p.ProductID, p.ProductName, p.ProductPrice, p.Image, p.isSoldOut
+          ORDER BY total_quantity DESC";
+
 
 $res = mysqli_query($conn, $query);
 
@@ -35,13 +41,15 @@ while ($row = mysqli_fetch_assoc($res)) {
 
     if (!empty($row['ProductName'])) {
         $storeMap[$uid]['menu'][] = [
-            "id" => $row['ProductID'], // ✅ 现在这个字段不再是 null 了
-            "name" => $row['ProductName'],
-            "price" => floatval($row['ProductPrice']),
-            "image" => $row['Image'],
-            "isSoldOut" => (int)$row['isSoldOut'], // ✅ 保持是 0 或 1
+    "id" => $row['ProductID'],
+    "name" => $row['ProductName'],
+    "price" => floatval($row['ProductPrice']),
+    "image" => $row['Image'],
+    "isSoldOut" => (int)$row['isSoldOut'],
+    "total_quantity" => (int)$row['total_quantity'],
+    "total_sales" => (float)$row['total_sales']
+];
 
-        ];
     }
 }
 

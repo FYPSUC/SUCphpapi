@@ -15,11 +15,13 @@ $userId = $uid;
 
 
 // 获取最近 5 条交易记录
-$sql = "SELECT SenderID, SenderType, ReceiverType, CreatedAt 
+$sql = "SELECT SenderID, SenderType, ReceiverID, ReceiverType, Amount, VoucherID, CreatedAt
         FROM transaction
-        WHERE SenderID = ? 
-        ORDER BY CreatedAt DESC 
-        LIMIT 5";
+        WHERE ReceiverID = ?
+        ORDER BY CreatedAt DESC
+        ";
+
+
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $userId);
